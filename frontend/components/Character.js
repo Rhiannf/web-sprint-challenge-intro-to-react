@@ -12,9 +12,9 @@ function Character({ name, gender, homeWorld }) { // ❗ Add the props
   };
 
   return (
-    <div className='character-card' onClick={togglePlanet}>
-      <h2 className='character-name'></h2>
-      {showPlanet && <p className='character-planet'>{Character.planet}</p>}
+    <div className="character-card" onClick={togglePlanet}>
+      <h2 className="character-name"></h2>
+      {showPlanet && <p className="character-planet">{Character.planet}</p>}
     </div>
   );
 }

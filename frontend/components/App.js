@@ -34,7 +34,7 @@ function App() {
   
     return (
       //Pass data
-      <div className='App'>
+      <div className="App">
         { data.map((character, index) => (
           <Char name = {data[index].name} homeWorld = {data[index].homeWorld} Character key={index} character={character} />
         ))}
