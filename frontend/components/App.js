@@ -3,34 +3,45 @@ import axios from 'axios'
 import Character from './Character'
 import Char from './Char'
 
-const urlPlanets = 'http://localhost:9009/api/planets'
-const urlPeople = 'http://localhost:9009/api/people'
+const urlPlanets = 'http://localhost:9009/api/planets';
+const urlPeople = 'http://localhost:9009/api/people';
 
 function App() {
   // ❗ Create state to hold the data from the API
   // ❗ Create effects to fetch the data and put it in state
-    const [planets, setPlanets] = useState([]);
-    const [people, setPeople] = useState([]);
+    const [data, setData] = useState([]);
   
     useEffect(() => {
       // Fetch planets data
-      axios.get(urlPlanets)
-        .then(response => {
-          setPlanets(response.data);
-        })
-        .catch(error => {
-          console.log('Error fetching planets data: ', error);
-        })
-      
-      // Fetch people 
-      axios.get(urlPeople)
-        .then(response => {
-          setPeople(response.data);
-        })
-        .catch(error => {
-          console.log('Error fetching people data: ', error);
+      Promise.all([
+        fetch(urlPlanets),
+        fetch(urlPeople)
+      ]).then(function(response) {
+        return Promise.all(responses.map(function(response) {
+          return response.json();
+        }))
+      })
+      .then(function (data) {
+        
+        const planets = data[0];
+        const people = data[1];
+        const data1 = people;
+        const data2 = planets
+        let combinedData = data1.map(item1 => {
+          let item2 = data2.find(item => item.id === item1.homeWorld);
+          item1.homeWorld = item2.name;
+          return item1
+
         });
-    }, []); 
+
+        setData(combinedData)
+
+      })
+
+      .catch(function (error) {
+        console.error(error);
+      })
+    }, []);
   
     return (
       //Pass data
