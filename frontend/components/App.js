@@ -17,7 +17,7 @@ function App() {
         fetch(urlPlanets),
         fetch(urlPeople)
       ]).then(function(response) {
-        return Promise.all(responses.map(function(response) {
+        return Promise.all(response.map(function(response) {
           return response.json();
         }))
       })
@@ -28,13 +28,13 @@ function App() {
         const data1 = people;
         const data2 = planets
         let combinedData = data1.map(item1 => {
-          let item2 = data2.find(item => item.id === item1.homeWorld);
-          item1.homeWorld = item2.name;
+          let item2 = data2.find(item => item.id === item1.homeworld);
+          item1.homeworld = item2.name;
           return item1
 
         });
 
-        setData(combinedData)
+        setData(combinedData);
 
       })
 
@@ -47,7 +47,7 @@ function App() {
       //Pass data
       <div className="App">
         { data.map((character, index) => (
-          <Char name = {data[index].name} homeWorld = {data[index].homeWorld} Character key={index} character={character} />
+          <Char name = {data[index].name} homeWorld = {data[index].homeworld} Character key={index} character={character} />
         ))}
       </div>
     );
